@@ -1,1 +1,1 @@
-include ':app',':SobotOnline'
+include ':app', ':OnlineSdk'

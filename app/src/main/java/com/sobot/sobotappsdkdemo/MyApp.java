@@ -1,13 +1,11 @@
 package com.sobot.sobotappsdkdemo;
 
 import android.app.Application;
-import android.content.SharedPreferences;
 import android.text.TextUtils;
 import android.util.Log;
 
-import com.sobot.common.utils.SobotLogUtils;
-import com.sobot.common.utils.SobotSPUtils;
 import com.sobot.online.SobotOnlineService;
+import com.sobot.utils.SobotLogUtils;
 import com.umeng.commonsdk.UMConfigure;
 
 public class MyApp extends Application {
@@ -24,7 +22,7 @@ public class MyApp extends Application {
             SobotOnlineService.initWithHost(this, "https://api.sobot.com");
         }
         SobotOnlineService.setNotificationFlag(this, true, R.drawable.sobot_logo_small_icon);
-        SobotLogUtils.setShowDebug(true);
+        SobotOnlineService.setShowDebug(true);
 
         //友盟init
         UMConfigure.init(this, "5fa8bb1a1c520d3073a333fb", "Umeng", UMConfigure.DEVICE_TYPE_PHONE, null);

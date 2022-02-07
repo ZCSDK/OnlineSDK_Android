@@ -11,15 +11,12 @@ import android.text.TextUtils;
 import android.view.View;
 import android.widget.TextView;
 
-
-import com.sobot.common.socket.SobotSocketConstant;
-import com.sobot.common.utils.SobotActivityManager;
-import com.sobot.common.utils.SobotAppUtils;
-import com.sobot.common.utils.SobotLogUtils;
-import com.sobot.common.utils.SobotSPUtils;
 import com.sobot.online.SobotOnlineService;
 import com.sobot.online.weight.SobotContainsEmojiEditText;
 import com.sobot.online.weight.toast.SobotToastUtil;
+import com.sobot.onlinecommon.socket.SobotSocketConstant;
+import com.sobot.utils.SobotLogUtils;
+import com.sobot.utils.SobotSharedPreferencesUtil;
 
 public class MainActivity extends AppCompatActivity {
     private MyReceiver receiver;
@@ -43,9 +40,9 @@ public class MainActivity extends AppCompatActivity {
             yuming.setText(yumingStr);
         }
 
-        appid.setText(SobotSPUtils.getInstance().getString("appid"));
-        appkey.setText(SobotSPUtils.getInstance().getString("appkey"));
-        account.setText(SobotSPUtils.getInstance().getString("account"));
+        appid.setText(SobotSharedPreferencesUtil.getInstance(this).get("appid"));
+        appkey.setText(SobotSharedPreferencesUtil.getInstance(this).get("appkey"));
+        account.setText(SobotSharedPreferencesUtil.getInstance(this).get("account"));
         tv_start.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -74,9 +71,9 @@ public class MainActivity extends AppCompatActivity {
                 }
                 SobotOnlineService.startAuthWithAcount(MainActivity.this, appid.getText().toString().trim(),
                         appkey.getText().toString().trim(), account.getText().toString().trim(), 1);
-                SobotSPUtils.getInstance().put("account", account.getText().toString().trim());
-                SobotSPUtils.getInstance().put("appid", appid.getText().toString().trim());
-                SobotSPUtils.getInstance().put("appkey", appkey.getText().toString().trim());
+                SobotSharedPreferencesUtil.getInstance(MainActivity.this).put("account", account.getText().toString().trim());
+                SobotSharedPreferencesUtil.getInstance(MainActivity.this).put("appid", appid.getText().toString().trim());
+                SobotSharedPreferencesUtil.getInstance(MainActivity.this).put("appkey", appkey.getText().toString().trim());
             }
         });
         //注册广播获取新收到的信息和未读消息数
